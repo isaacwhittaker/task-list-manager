@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "tasklistmanager-20181013143836-authRole",
+            "UnauthRoleArn": "arn:aws:iam::101101347110:role/tasklistmanager-20181013143836-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::101101347110:role/tasklistmanager-20181013143836-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "tasklistmanager-20181013143836-deployment",
+            "UnauthRoleName": "tasklistmanager-20181013143836-unauthRole",
+            "StackName": "tasklistmanager-20181013143836",
+            "StackId": "arn:aws:cloudformation:us-east-2:101101347110:stack/tasklistmanager-20181013143836/f60691e0-cf27-11e8-885f-0626229bfdda"
+        }
+    }
+}
