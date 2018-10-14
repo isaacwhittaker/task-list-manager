@@ -20,6 +20,9 @@ const client = new AWSAppSyncClient({
         type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
         jwtToken: async () => (await Auth.currentSession()).getIdToken().getJwtToken(),
     },
+    options: {
+      fetchPolicy: 'cache-and-network'
+    }
 });
 
 class App extends Component {
