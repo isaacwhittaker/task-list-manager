@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import router from './router.js';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import AWSAppSyncClient from "aws-appsync";
 import { Rehydrated } from 'aws-appsync-react';
@@ -29,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Task List Manager</h2>
+        <h2>Task List Manager <span><NavLink to="/"><button>Home</button></NavLink></span></h2>
         {router}
       </div>
     );
