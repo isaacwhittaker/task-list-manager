@@ -1,37 +1,36 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphqlMutation } from 'aws-appsync-react';
-import { v4 as uuid } from 'uuid';
 
-const allTasks = gql`
-  query AllTasks($nextToken: String) {
-    allTasks(nextToken: $nextToken) {
+const listTemplates = gql`
+  query ListTemplates($nextToken: String) {
+    listTemplates(nextToken: $nextToken) {
       items {
         id
         owner
         title
         description
-        taskStatus
+        schedule
       }
       nextToken
     }
   }
 `;
 
-const createTask = gql`
-  mutation CreateTask($id: ID!, $owner: String! $title: String! $taskStatus: String! $description: String!) {
-    createTask(id: $id owner: $owner title: $title taskStatus: $taskStatus description: $description) {
+const createTemplate = gql`
+  mutation CreateTemplate($input: CreateTemplateInput!) {
+    createTemplate(input: $input) {
       id
       owner
       title
       description
-      taskStatus
+      schedule
     }
   }
 `;
 
 class CreateTemplate extends Component {
-  state = { owner: '', title: '', description: '' }
+  state = { owner: '', title: '', description: '', schedule: '' }
 
   onChange(event, type) {
     this.setState({
@@ -51,18 +50,23 @@ class CreateTemplate extends Component {
         <div>
           Description: <span><input id="description-input" onChange={(event) => this.onChange(event, "description")} /></span>
         </div>
+        <div>
+          Schedule: <span><input id="schedule-input" onChange={(event) => this.onChange(event, "schedule")} /></span>
+        </div>
         <br/>
         <button onClick={() => {
-          this.props.createTask({
-            id: uuid(),
-            owner: this.state.owner,
-            title: this.state.title,
-            description: this.state.description,
-            taskStatus: 'Started'
+          this.props.createTemplate({
+            input: {
+              owner: this.state.owner,
+              title: this.state.title,
+              description: this.state.description,
+              schedule: this.state.schedule
+            }
           })
           document.getElementById('owner-input').value='';
           document.getElementById('title-input').value='';
           document.getElementById('description-input').value='';
+          document.getElementById('schedule-input').value='';
         }}>
           Add
         </button>
@@ -71,5 +75,5 @@ class CreateTemplate extends Component {
   }
 }
 
-const CreateTemplateOffline = graphqlMutation(createTask, allTasks, 'Task')(CreateTemplate);
+const CreateTemplateOffline = graphqlMutation(createTemplate, listTemplates, 'Template')(CreateTemplate);
 export default CreateTemplateOffline;
