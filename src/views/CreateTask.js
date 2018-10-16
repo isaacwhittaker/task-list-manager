@@ -3,9 +3,9 @@ import gql from 'graphql-tag';
 import { graphqlMutation } from 'aws-appsync-react';
 import { v4 as uuid } from 'uuid';
 
-const allTasks = gql`
-  query AllTasks($nextToken: String) {
-    allTasks(nextToken: $nextToken) {
+const myTasks = gql`
+  query MyTasks($nextToken: String) {
+    myTasks(nextToken: $nextToken) {
       items {
         id
         owner
@@ -19,8 +19,8 @@ const allTasks = gql`
 `;
 
 const createTask = gql`
-  mutation CreateTask($id: ID!, $owner: String! $title: String! $taskStatus: String! $description: String!) {
-    createTask(id: $id owner: $owner title: $title taskStatus: $taskStatus description: $description) {
+  mutation CreateTask($id: ID!, $owner: String, $title: String!, $taskStatus: String!, $description: String!) {
+    createTask(id: $id, owner: $owner, title: $title, taskStatus: $taskStatus, description: $description) {
       id
       owner
       title
@@ -31,7 +31,7 @@ const createTask = gql`
 `;
 
 class CreateTask extends Component {
-  state = { owner: '', title: '', description: '' }
+  state = { title: '', description: '' }
 
   onChange(event, type) {
     this.setState({
@@ -43,9 +43,6 @@ class CreateTask extends Component {
     return (
       <div>
         <div>
-          Owner: <span><input id="owner-input" onChange={(event) => this.onChange(event, "owner")} /></span>
-        </div>
-        <div>
           Title: <span><input id="title-input" onChange={(event) => this.onChange(event, "title")} /></span>
         </div>
         <div>
@@ -55,12 +52,11 @@ class CreateTask extends Component {
         <button onClick={() => {
           this.props.createTask({
             id: uuid(),
-            owner: this.state.owner,
+            owner: null,
             title: this.state.title,
             description: this.state.description,
             taskStatus: 'Started'
           })
-          document.getElementById('owner-input').value='';
           document.getElementById('title-input').value='';
           document.getElementById('description-input').value='';
         }}>
@@ -71,5 +67,5 @@ class CreateTask extends Component {
   }
 }
 
-const CreateTaskOffline = graphqlMutation(createTask, allTasks, 'Task')(CreateTask);
+const CreateTaskOffline = graphqlMutation(createTask, myTasks, 'Task')(CreateTask);
 export default CreateTaskOffline;

@@ -4,9 +4,9 @@ import gql from 'graphql-tag';
 import LoadingPlaceholder from './LoadingPlaceholder';
 import ErrorPlaceholder from './ErrorPlaceholder';
 
-const allTasks = gql`
-  query AllTasks($nextToken: String) {
-    allTasks(nextToken: $nextToken) {
+const myTasks = gql`
+  query MyTasks($nextToken: String) {
+    myTasks(nextToken: $nextToken) {
       items {
         id
         owner
@@ -22,7 +22,7 @@ const allTasks = gql`
 class MyTasks extends Component {
   render() {
     return (
-      <Query query={allTasks}>
+      <Query query={myTasks}>
         {({ loading, error, data }) => {
           if (loading) return <LoadingPlaceholder/>;
           if (error) return <ErrorPlaceholder/>;
@@ -31,7 +31,7 @@ class MyTasks extends Component {
             <div>
               <ul>
 
-                {data.allTasks.items.map(({ description, id, owner, taskStatus, title }) => (
+                {data.myTasks.items.map(({ description, id, owner, taskStatus, title }) => (
                   <li key={id}>
                     {title}: {description} [{taskStatus} - {owner}]
                   </li>
