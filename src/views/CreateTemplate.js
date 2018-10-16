@@ -55,18 +55,27 @@ class CreateTemplate extends Component {
         </div>
         <br/>
         <button onClick={() => {
-          this.props.createTemplate({
-            input: {
-              owner: this.state.owner,
-              title: this.state.title,
-              description: this.state.description,
-              schedule: this.state.schedule
-            }
-          })
-          document.getElementById('owner-input').value='';
-          document.getElementById('title-input').value='';
-          document.getElementById('description-input').value='';
-          document.getElementById('schedule-input').value='';
+          var schedule = window.later.parse.text(this.state.schedule);
+
+          if (schedule.error !== -1) {
+            alert("Invalid schedule, see examples.")
+            console.log('Invalid schedule:');
+            console.log(this.state.schedule);
+          } else {
+            var scheduleString = JSON.stringify(schedule);
+            this.props.createTemplate({
+              input: {
+                owner: this.state.owner,
+                title: this.state.title,
+                description: this.state.description,
+                schedule: scheduleString
+              }
+            })
+            document.getElementById('owner-input').value='';
+            document.getElementById('title-input').value='';
+            document.getElementById('description-input').value='';
+            document.getElementById('schedule-input').value='';
+          }
         }}>
           Add
         </button>

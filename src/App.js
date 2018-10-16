@@ -11,6 +11,11 @@ import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import AppSync from './aws-exports.js';
 
+// # Todo: find a better way to import this... so we don't have global variable
+// for now, 'later' must be required as later/later.js to avoid error, 
+// see https://github.com/bunkat/later/issues/155
+require('later/later.js');
+
 Amplify.configure(AppSync);
 
 const client = new AWSAppSyncClient({

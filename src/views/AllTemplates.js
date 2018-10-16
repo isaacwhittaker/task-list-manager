@@ -31,11 +31,16 @@ class AllTemplates extends Component {
             <div>
               <ul>
 
-                {data.listTemplates.items.map(({ schedule, id, owner, title }) => (
-                  <li key={id}>
-                    {title}: {schedule} [{owner}]
-                  </li>
-                ))}
+                {data.listTemplates.items.map(({ schedule, id, owner, title }) => {
+                  var jsonSchedule = JSON.parse(schedule);
+                  var scheduleObj = window.later.schedule(jsonSchedule);
+
+                  return (
+                    <li key={id}>
+                      {title}: {scheduleObj.next(1).toString()} [{owner}]
+                    </li>
+                  )
+                })}
 
               </ul>
             </div>
