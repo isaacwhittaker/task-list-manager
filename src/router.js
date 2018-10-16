@@ -4,6 +4,7 @@ import Home from "./views/Home";
 import MyTasks from "./views/MyTasks";
 import CreateTask from "./views/CreateTask";
 import AllTasks from "./views/AllTasks";
+import AllTemplates from "./views/AllTemplates";
 import CreateTemplate from "./views/CreateTemplate";
 
 export default (
@@ -13,6 +14,7 @@ export default (
             <Route render={props => <div><MyTasks {...props} /></div> } path='/tasks' />
             <Route render={props => <div><CreateTask {...props} /></div> } path='/create' />
             <Route render={props => <div><AllTasks {...props} /></div> } path='/all-tasks' />
+            <Route render={props => <div><AllTemplates {...props} /></div> } path='/templates' />
             <Route render={props => <div><CreateTemplate {...props} /></div> } path='/create-template' />
         </Switch>
     </div>

@@ -20,6 +20,9 @@ class Home extends Component {
           <NavLink to="/all-tasks">
             <button>All Tasks</button>
           </NavLink>
+          <NavLink to="/templates">
+            <button>Templates</button>
+          </NavLink>
           <NavLink to="/create-template">
             <button>Create Template</button>
           </NavLink>
