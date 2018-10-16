@@ -20,9 +20,6 @@ const client = new AWSAppSyncClient({
         // Amazon Cognito user pools using AWS Amplify
         type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
         jwtToken: async () => (await Auth.currentSession()).getIdToken().getJwtToken(),
-    },
-    options: {
-      fetchPolicy: 'cache-and-network'
     }
 });
 
