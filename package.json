@@ -9,6 +9,7 @@
     "aws-appsync": "^1.4.0",
     "aws-appsync-react": "^1.1.4",
     "aws-sdk": "^2.334.0",
+    "bootstrap": "^3.3.7",
     "graphql-tag": "^2.10.0",
     "later": "^1.2.0",
     "react": "^16.5.2",

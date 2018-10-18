@@ -16,6 +16,8 @@ import AppSync from './aws-exports.js';
 // see https://github.com/bunkat/later/issues/155
 require('later/later.js');
 
+require('bootstrap/dist/css/bootstrap.css');
+
 Amplify.configure(AppSync);
 
 const client = new AWSAppSyncClient({

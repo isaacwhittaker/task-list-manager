@@ -31,7 +31,7 @@ const createTask = gql`
 `;
 
 class CreateTask extends Component {
-  state = { title: '', description: '' }
+  state = { title: '', description: '', showAlert: false }
 
   onChange(event, type) {
     this.setState({
@@ -41,27 +41,46 @@ class CreateTask extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          Title: <span><input id="title-input" onChange={(event) => this.onChange(event, "title")} /></span>
+      <div className="containter">
+        <div className="form-horizontal">
+          <div className="form-group">
+            <label className="control-label col-sm-2" htmlFor="title-input">Title:</label>
+            <div className="col-sm-8">
+              <input type="text" className="form-control" id="title-input" onChange={(event) => this.onChange(event, "title")} />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="control-label col-sm-2" htmlFor="description-input">Description:</label>
+            <div className="col-sm-8">
+              <input type="text" className="form-control" id="description-input" onChange={(event) => this.onChange(event, "description")} />
+            </div>
+          </div>
+          <br/>
+          <button className="btn btn-default" onClick={() => {
+            this.props.createTask({
+              id: uuid(),
+              owner: null,
+              title: this.state.title,
+              description: this.state.description,
+              taskStatus: 'Started'
+            })
+            document.getElementById('title-input').value='';
+            document.getElementById('description-input').value='';
+            this.setState({ showAlert: true });
+          }}>
+            Create Task
+          </button>
         </div>
-        <div>
-          Description: <span><input id="description-input" onChange={(event) => this.onChange(event, "description")} /></span>
-        </div>
-        <br/>
-        <button onClick={() => {
-          this.props.createTask({
-            id: uuid(),
-            owner: null,
-            title: this.state.title,
-            description: this.state.description,
-            taskStatus: 'Started'
-          })
-          document.getElementById('title-input').value='';
-          document.getElementById('description-input').value='';
-        }}>
-          Add
-        </button>
+
+        {
+          this.state.showAlert ? 
+            <div className="alert alert-success alert-dismissible" id="success-alert">
+              <a href="#!" className="close" data-dismiss="alert" aria-label="close" onClick={() => this.setState({ showAlert: false })}>&times;</a>
+              <strong>Success!</strong> Click to <a href="/tasks" className="alert-link">view all tasks</a>.
+            </div>
+          : null
+        }
+        
       </div>
     );
   }

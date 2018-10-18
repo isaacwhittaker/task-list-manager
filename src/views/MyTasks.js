@@ -9,7 +9,6 @@ const myTasks = gql`
     myTasks(nextToken: $nextToken) {
       items {
         id
-        owner
         title
         description
         taskStatus
@@ -28,12 +27,19 @@ class MyTasks extends Component {
           if (error) return <ErrorPlaceholder/>;
 
           return (
-            <div>
-              <ul>
+            <div className="container">
+              <ul className="list-group">
+                <li className="row list-group-item">
+                  <h4 className="col-sm-4">Title</h4>
+                  <h4 className="col-sm-4">Description</h4>
+                  <h4 className="col-sm-4">Status</h4>
+                </li>
 
-                {data.myTasks.items.map(({ description, id, owner, taskStatus, title }) => (
-                  <li key={id}>
-                    {title}: {description} [{taskStatus} - {owner}]
+                {data.myTasks.items.map(({ description, id, taskStatus, title }) => (
+                  <li key={id} className="row list-group-item">
+                    <div className="col-sm-4">{title}</div>
+                    <div className="col-sm-4">{description}</div>
+                    <div className="col-sm-4">{taskStatus}</div>
                   </li>
                 ))}
 
