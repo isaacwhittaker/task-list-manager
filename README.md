@@ -11,10 +11,10 @@ npm install
 To run the project, use this command:
 
 ```javascript
-npm run
+npm start
 ```
 
-__*For testing, please log in as "manager" (password: manager@123) to see manager view, or "user" (password: user@123) to see user view.__
+__*For testing, please log in as "manager" (password: Manager@123) to see manager view, or "user" (password: User@123) to see user view.__
 
 ### Features
 
