@@ -34,7 +34,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Task List Manager <span><NavLink to="/"><button>Home</button></NavLink></span></h2>
+        <h2>Task List Manager <span><NavLink to="/"><button className="btn btn-default">Home</button></NavLink></span></h2>
         {router}
       </div>
     );

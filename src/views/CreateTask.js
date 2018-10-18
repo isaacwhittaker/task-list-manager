@@ -56,7 +56,7 @@ class CreateTask extends Component {
             </div>
           </div>
           <br/>
-          <button className="btn btn-default" onClick={() => {
+          <button className="btn btn-primary" onClick={() => {
             this.props.createTask({
               id: uuid(),
               owner: null,

@@ -67,7 +67,7 @@ class CreateTemplate extends Component {
             </div>
           </div>
           <br/>
-          <button className="btn btn-default" onClick={() => {
+          <button className="btn btn-primary" onClick={() => {
             var schedule = window.later.parse.text(this.state.schedule);
 
             if (schedule.error !== -1) {
