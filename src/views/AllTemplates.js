@@ -28,16 +28,23 @@ class AllTemplates extends Component {
           if (error) return <ErrorPlaceholder/>;
 
           return (
-            <div>
-              <ul>
+            <div className="container">
+              <ul className="list-group">
+                <li className="row list-group-item">
+                  <h4 className="col-sm-4">Title</h4>
+                  <h4 className="col-sm-4">Next Scheduled Occurance</h4>
+                  <h4 className="col-sm-4">Owner</h4>
+                </li>
 
                 {data.listTemplates.items.map(({ schedule, id, owner, title }) => {
                   var jsonSchedule = JSON.parse(schedule);
                   var scheduleObj = window.later.schedule(jsonSchedule);
 
                   return (
-                    <li key={id}>
-                      {title}: {scheduleObj.next(1).toString()} [{owner}]
+                    <li key={id} className="row list-group-item">
+                      <div className="col-sm-4">{title}</div>
+                      <div className="col-sm-4">{scheduleObj.next(1).toString()}</div>
+                      <div className="col-sm-4">{owner}</div>
                     </li>
                   )
                 })}

@@ -28,12 +28,21 @@ class AllTasks extends Component {
           if (error) return <ErrorPlaceholder/>;
 
           return (
-            <div>
-              <ul>
+            <div className="container">
+              <ul className="list-group">
+                <li className="row list-group-item">
+                  <h4 className="col-sm-3">Title</h4>
+                  <h4 className="col-sm-3">Description</h4>
+                  <h4 className="col-sm-3">Owner</h4>
+                  <h4 className="col-sm-3">Status</h4>
+                </li>
 
                 {data.allTasks.items.map(({ description, id, owner, taskStatus, title }) => (
-                  <li key={id}>
-                    {title}: {description} [{taskStatus} - {owner}]
+                  <li key={id} className="row list-group-item">
+                    <div className="col-sm-3">{title}</div>
+                    <div className="col-sm-3">{description}</div>
+                    <div className="col-sm-3">{owner}</div>
+                    <div className="col-sm-3">{taskStatus}</div>
                   </li>
                 ))}
 
